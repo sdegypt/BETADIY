@@ -1,0 +1,38 @@
+2025-07-04 04:24:05 [31merror[39m: ReferenceError: C:\Users\sch2\Desktop\DIYsite-master\views\userPosts.ejs:196
+    194|                 <div class="comment">
+    195|                   <a href="/profile?userId=${comment.user_id}">
+ >> 196|                     <% if (comment.user_avatar) { %>
+    197|                       <img src="<%= getCloudinaryImageUrl(comment.user_avatar, '/uploads/images/pngwing.com.png') %>" alt="${comment.user_name}" class="comment-avatar" style="width: 50px; border-radius: 50%;" />
+    198|                     <% } else { %>
+    199|                       <span class="fa fa-user-circle fa-2x" style="color: #aaa; font-size: 50px;"></span>
+
+comment is not defined
+    at eval ("C:\\Users\\sch2\\Desktop\\DIYsite-master\\views\\userPosts.ejs":133:8)
+    at userPosts (C:\Users\sch2\Desktop\DIYsite-master\node_modules\ejs\lib\ejs.js:703:17)
+    at tryHandleCache (C:\Users\sch2\Desktop\DIYsite-master\node_modules\ejs\lib\ejs.js:274:36)
+    at exports.renderFile [as engine] (C:\Users\sch2\Desktop\DIYsite-master\node_modules\ejs\lib\ejs.js:491:10)
+    at View.render (C:\Users\sch2\Desktop\DIYsite-master\node_modules\express\lib\view.js:135:8)
+    at tryRender (C:\Users\sch2\Desktop\DIYsite-master\node_modules\express\lib\application.js:657:10)
+    at Function.render (C:\Users\sch2\Desktop\DIYsite-master\node_modules\express\lib\application.js:609:3)
+    at ServerResponse.render (C:\Users\sch2\Desktop\DIYsite-master\node_modules\express\lib\response.js:1049:7)
+    at getUserPosts (C:\Users\sch2\Desktop\DIYsite-master\controllers\ForumController.js:440:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-07-04 04:45:04 [31merror[39m: ReferenceError: C:\Users\sch2\Desktop\DIYsite-master\views\userPosts.ejs:196
+    194|                 <div class="comment">
+    195|                   <a href="/profile?userId=${comment.user_id}">
+ >> 196|                     <% if (comment.user_avatar) { %>
+    197|                       <img src="<%= getCloudinaryImageUrl(comment.user_avatar, '/uploads/images/pngwing.com.png') %>" alt="${comment.user_name}" class="comment-avatar" style="width: 50px; border-radius: 50%;" />
+    198|                     <% } else { %>
+    199|                       <span class="fa fa-user-circle fa-2x" style="color: #aaa; font-size: 50px;"></span>
+
+comment is not defined
+    at eval ("C:\\Users\\sch2\\Desktop\\DIYsite-master\\views\\userPosts.ejs":133:8)
+    at userPosts (C:\Users\sch2\Desktop\DIYsite-master\node_modules\ejs\lib\ejs.js:703:17)
+    at tryHandleCache (C:\Users\sch2\Desktop\DIYsite-master\node_modules\ejs\lib\ejs.js:274:36)
+    at exports.renderFile [as engine] (C:\Users\sch2\Desktop\DIYsite-master\node_modules\ejs\lib\ejs.js:491:10)
+    at View.render (C:\Users\sch2\Desktop\DIYsite-master\node_modules\express\lib\view.js:135:8)
+    at tryRender (C:\Users\sch2\Desktop\DIYsite-master\node_modules\express\lib\application.js:657:10)
+    at Function.render (C:\Users\sch2\Desktop\DIYsite-master\node_modules\express\lib\application.js:609:3)
+    at ServerResponse.render (C:\Users\sch2\Desktop\DIYsite-master\node_modules\express\lib\response.js:1049:7)
+    at getUserPosts (C:\Users\sch2\Desktop\DIYsite-master\controllers\ForumController.js:440:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
