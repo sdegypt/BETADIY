@@ -26,40 +26,51 @@ class UsersControllers {
       });
     });
   }
-
-  static async signUpControllers(req, res) {
+ static async signUpControllers(req, res) {
     try {
-      const { name, age, gender, country, language, occupation, phone, email, portfolio, password } = req.body;
-      const avatar = req.file ? req.file.path : null;
+
+      const { name, age, gender, email, password, confirm_password } = req.body;
+
+      // تحقق من تطابق كلمة المرور والتأكيد
+      if (password !== confirm_password) {
+        return res.render("signup", { errorMessage: "كلمتا المرور غير متطابقتين." });
+      }
+
       const hashedPassword = await bcrypt.hash(password, 10);
 
+      // طباعة البيانات قبل إرسالها إلى الموديل
+   
+
+      // إنشاء المستخدم
       const userId = await usersModels.createUser(
         name,
-        avatar,
         age,
         gender,
-        country,
-        language,
-        occupation,
-        phone,
         email,
-        portfolio,
-        hashedPassword
+        hashedPassword,
+        '',       // country (افتراضي فارغ)
+        'ar'      // language (افتراضي عربي)
       );
 
       const isJson = req.headers['content-type'] && req.headers['content-type'].includes('application/json');
+
       if (isJson) {
         return res.json({ success: true, message: "تم إنشاء الحساب بنجاح! يمكنك الآن تسجيل الدخول." });
       }
-      // إذا كان الطلب عادي (form)
+
       res.render("login", { successMessage: "تم إنشاء الحساب بنجاح! يمكنك الآن تسجيل الدخول." });
+
     } catch (error) {
-      console.error('خطأ عند تسجيل مستخدم جديد:', error);
+
       const isJson = req.headers['content-type'] && req.headers['content-type'].includes('application/json');
-      const msg = error.code === "ER_DUP_ENTRY" ? "البريد الإلكتروني مسجل بالفعل، الرجاء استخدام بريد آخر." : "حدث خطأ أثناء التسجيل، حاول مرة أخرى.";
+      const msg = error.code === "ER_DUP_ENTRY"
+        ? "البريد الإلكتروني مسجل بالفعل، الرجاء استخدام بريد آخر."
+        : "حدث خطأ أثناء التسجيل، حاول مرة أخرى.";
+
       if (isJson) {
         return res.json({ success: false, message: msg });
       }
+
       res.render("signup", { errorMessage: msg });
     }
   }
