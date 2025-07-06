@@ -25,21 +25,35 @@ class UsersModels {
       });
     });
   }
+ static async createUser(
+  name,
+  age,
+  gender,
+  email,
+  password,
+  country = '',
+  language = 'ar',
+  occupation = '',
+  phone = ''
+) {
+  return new Promise((resolve, reject) => {
+    const sql = `INSERT INTO users (name, age, gender, email, password, country, language, occupation, phone)
+                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`;
 
-  static async createUser(name, avatar, age, gender, country, language, occupation, phone, email, portfolio, password) {
-    return new Promise((resolve, reject) => {
-      const query =
-        "INSERT INTO users (name, avatar, age, gender, country, language, occupation, phone, email, portfolio, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-      db.query(
-        query,
-        [name, avatar, age, gender, country, language, occupation, phone, email, portfolio, password],
-        (error, results) => {
-          if (error) return reject(error);
-          resolve(results.insertId);
-        }
-      );
+    const values = [name, age, gender, email, password, country, language, occupation, phone];
+
+
+    db.query(sql, values, (err, result) => {
+      if (err) {
+        return reject(err);
+      }
+
+      resolve(result.insertId);
     });
-  }
+  });
+}
+
+
 
   static async updatePassword(userId, hashedPassword) {
     return new Promise((resolve, reject) => {
